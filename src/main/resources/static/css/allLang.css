@@ -1,0 +1,106 @@
+html,body{
+	width:99.7%;
+	height: 100%;
+	display:flex;
+	flex-direction: column;
+	background-color: #71b5cc;
+}
+
+.functions_container,.info_container{
+	text-align:center;
+	height:max-content;
+	min-width:max-content;
+	width:99.4%;
+	display:flex;
+	flex-direction: row;
+}
+
+.functions_container{
+	background-color: darkseagreen;
+	border-style: solid;
+	border-width:2px;
+	border-color: olive;
+	border-radius:10px;
+	flex:1;
+}
+
+.info_container{
+	background-color: lightskyblue;
+	flex:7;
+}
+
+.group_creation,.user_profile,.logout_button{
+	
+	border-width:2px;
+	border-color: olive;
+}
+
+.user_profile{
+	background: url('../img/profile.png') center no-repeat;
+	background-size: contain;
+	text-align:center;
+	cursor:pointer;
+	border-right-style: dashed;
+	flex:1;
+}
+
+
+.group_creation{
+	border-left-style: dashed;
+	border-right-style: dashed;
+	flex:5
+}
+
+.logout_button{
+	background: url('../img/logout.png') center no-repeat;
+	background-size: contain;
+	text-align:center;
+	cursor:pointer;
+	border-left-style: dashed;
+	flex:1;
+}
+
+.user_container,.user_groups,.other_groups{
+	margin:10px;
+	padding:3px;
+	min-height:max-content;
+	min-width:max-content;
+	border-style: solid;
+	word-wrap:break-word;
+	overflow: auto;
+	border-width:2px;
+	border-color: olive;
+	border-radius:10px;
+	flex:1;
+}
+
+.user_container{
+	background-color: darkseagreen;
+	
+}
+
+.user_groups{
+	background-color: darkseagreen;
+}
+
+.other_groups{
+	background-color: darkseagreen;
+}
+
+.user,.user_group,.other_group{
+	margin-bottom:5px;
+	max-height:20%;
+	min-height:60px;
+	min-width:max-content;
+	border-style: solid;
+	word-wrap:break-word;
+	border-width:1px;
+	border-color: gray;
+	background-color: lightgray;
+	overflow:auto;
+}
+
+.user_group{
+	cursor: pointer;
+}
+

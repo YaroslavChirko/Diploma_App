@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" th:href="@{/css/show-available-users.css}">
+<link rel="stylesheet" th:href="@{/css/inputs.css}">
+</head>
+<body>
+	<div class="add_user_container">
+		<form th:action="@{/group/{groupSerial}/addUser(groupSerial=${serial})}" method="post" >
+			<h3>Add user form:</h3>
+			<label for="email">User email:</label>
+			<input type ="text" name="email"><br>
+			<label for="role">User role:</label>
+			<input type ="text" name="role" ><br>
+			<label for="request-rights">Grant request accept rights:</label>
+			<input type="checkbox" name="request-rights"><br>
+			<label for="task-rights">Grant task add/modify rights:</label>
+			<input type="checkbox" name="task-rights"><br>
+			<label for="group-rights">Grant group modify rights:</label>
+			<input type="checkbox" name="group-rights"><br>
+			<input type="submit" value="add User">
+		</form>
+	</div>
+
+	<div class="user_container">
+		<div  th:each = "user: ${users}" class="user">
+			<span th:text="${user.name}"></span><br>
+			<span th:text="${user.email}"></span><br>
+			<span th:text="${user.bio}"></span><br>
+			<form th:action="@{/group/{groupSerial}/addUser(groupSerial=${serial})}" method="post">
+				<input type="hidden" th:value="${user.email}" name="email">
+				<label for="role">User role:</label>
+				<input type="text" th:name="role"><br>
+				<label for="task-rights">Grant request accept rights:</label>
+				<input type="checkbox" name="request-rights"><br>
+				<label for="task-rights">Grant task add/modify rights:</label>
+				<input type="checkbox" name="task-rights"><br>
+				<label for="task-rights">Grant group modify rights:</label>
+				<input type="checkbox" name="group-rights"><br>
+				<input type="submit" value="add User">
+			</form>
+			<br><br>
+		</div>
+	</div>
+</body>
+</html>

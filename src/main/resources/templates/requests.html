@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+<link rel="stylesheet" th:href="@{/css/requests.css}">
+<link rel="stylesheet" th:href="@{/css/inputs.css}">
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+
+<script th:src="@{/js/chat_func.js}">
+</script>
+</head>
+<body onunload="disconnect()" th:data-serial="${serial}" th:onload="connect([[${serial}+'/requests']]);">
+	
+	
+	
+	<div class="request_container">
+		<div  th:each = "request: ${requests}" class="request">
+			<span th:text="|User ${request.fromLogin} wants to join the chat!|"></span><br>
+			<span th:text="${request.sentAt}"></span><br><br>
+			<form th:action = "@{requests/process}">
+			<input type="hidden" name="user_login" th:value="${request.fromLogin}">
+			<label for="role">Role:</label>
+			<input type="text" name="role"><br>
+			<label for="task-rights">Grant request accept rights:</label>
+			<input type="checkbox" name="request-rights"><br>
+			<label for="task-rights">Grant task add/modify rights:</label>
+			<input type="checkbox" name="task-rights"><br>
+			<label for="task-rights">Grant group modify rights:</label>
+			<input type="checkbox" name="group-rights"><br>
+			<input type="submit" name="accept" value="accept">
+			<input type="submit" name="deny" value="deny">
+			</form>
+		</div>
+	</div>
+	
+	
+</body >
+</html>

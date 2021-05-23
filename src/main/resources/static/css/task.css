@@ -1,0 +1,48 @@
+html,body{
+	background-color: #71b5cc;
+	width:99.5%;
+	height:99%;
+	display:flex;
+	flex-direction:row;
+}
+
+.task_creation_form{
+	flex:1;
+	text-align: center;
+	background-color: lightskyblue;
+}
+
+.task_container{
+	flex:9;
+	display:flex;
+	flex-direction:row;
+}
+.pending_task_container,.done_task_container{
+	flex:1;
+	display:flex;
+	flex-direction:column;
+	overflow: auto;
+}
+
+.pending_task,.done_task{
+	height:max-content;
+	min-width: max-content;
+	max-width:60%;
+	border-style: solid;
+	border-width:2px;
+	border-color: olive;
+	border-radius:10px;
+	word-wrap:break-word;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5%;
+	padding-left:8px;
+}
+
+.pending_task{
+	background-color: #9380ff;
+}
+
+.done_task{
+	background-color: #79ff79;
+}

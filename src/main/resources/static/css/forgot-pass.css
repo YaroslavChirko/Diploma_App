@@ -1,0 +1,32 @@
+html,body{
+	width:99.5%;
+	height:99%;
+	background-color: #71b5cc;
+	
+}
+
+.reset_form,.change_form{
+	text-align:center;
+	vertical-align: middle;
+	margin:auto;
+	height:max-content;
+	min-width: max-content;
+	max-width:40%;
+  	position: absolute;
+  	top: 0; left: 0; bottom: 0; right: 0;
+	border-style: solid;
+	border-width:2px;
+	border-color: olive;
+	border-radius:10px;
+	word-wrap:break-word;
+	background-color: darkseagreen;
+}
+
+
+
+.show_pass{
+	cursor:pointer;
+	width:20px;
+	height:20px;
+	background-color: springgreen;
+}

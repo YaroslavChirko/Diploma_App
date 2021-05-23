@@ -1,0 +1,56 @@
+html,body{
+	margin:auto;
+	width:90%;
+	height:90%;
+	background-color: #71b5cc;
+}
+
+.auth_buttons{
+	
+	min-height:max-content;
+	min-width:max-content;
+	height:50%;
+	width:50%;
+  	position: absolute;
+  	top: 0; left: 0; bottom: 0; right: 0;
+	background-color:lightskyblue; 
+  	margin:auto;
+  	display:flex;
+}
+
+form{
+	min-height:max-content;
+	min-width:max-content;
+	height:50%;
+	width:100%;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top:auto;
+	margin-bottom:auto;
+}
+
+.sign-in_button,.register_button{
+	font-size:20px;
+	color:val(--button-color);
+	text-align:center;
+	min-height:max-content;
+	min-width:max-content;
+	height:100%;
+	width:100%;
+	border-style: solid;
+	border-width:2px;
+	border-color: olive;
+	border-radius:10px;
+}
+
+.register_button{
+	background: url('../img/register.png') center no-repeat;
+	background-size: contain;
+	background-color: darkseagreen;
+}
+
+.sign-in_button{
+	background: url('../img/sign-in.png') center no-repeat;
+	background-size: contain;
+	background-color: darkseagreen;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${user.name}"></title>
+<link rel="stylesheet" th:href="@{/css/details.css}">
+<link rel="stylesheet" th:href="@{/css/inputs.css}">
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/js/description_edit.js}"></script>
+</head>
+<body>
+	<div class="elements">
+		<form class="edit_form" th:action="@{details/edit}" method="post">
+			<div class="entity_name">
+				<p class="name"  th:text="${user.name}"></p>
+			</div>
+			
+			<p th:text = "${user.email}" class="entity_identifier"></p>
+			
+			<div class="entity_information">
+				<p class="bio"  th:text="${user.bio}"></p>
+			</div>
+			
+			<div class="user_languages">
+				<div class="user_language" th:each="language: ${user.languages}">
+					<p th:text = "${language}"></p>
+				</div>
+			</div>
+		</form>
+		
+		<button class="edit"
+			th:data-name = "${user.name}"
+			th:data-bio = "${user.bio}"
+			th:onclick="showEditForm([[${user.name}]],[[${user.bio}]]);">edit</button>
+	</div>
+</body>
+</html>

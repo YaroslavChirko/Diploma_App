@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Register or sign in</title>
+<link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+	<div class="auth_buttons" >
+		<form th:action="@{/register}">
+			<div class="register_button" onclick="javascript:this.parentNode.submit();">Register</div>
+		</form>
+		<form th:action="@{/sign-in}">
+			<div class="sign-in_button"onclick="javascript:this.parentNode.submit();">Sign In</div>
+		</form>
+	</div>
+</body>
+</html>

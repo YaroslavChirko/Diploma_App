@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta th:if="${_csrf}"name="_csrf" th:content="${_csrf.token}"/>
+<title>Main Page</title>
+
+<link rel="stylesheet" th:href="@{/css/allLang.css}">
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+
+<script th:src="@{/js/chat_func.js}">
+</script>
+
+</head>
+<body>
+<div class="functions_container">
+	<div class="user_profile" th:onclick="|location.href='@{{email}/details(email=${session.email})}'|">
+		to my profile
+	</div>
+		<div class="group_creation">
+			<form th:action="@{/group/register}" method="post" th:object="${groupModel}">
+				<label for="group_name">Group Name: </label> 
+				<input type ="text" name="group_name" th:field="*{name}"><br>
+				<p th:each="err : ${#fields.errors('name')}" th:text="${err}" class="error"></p><br>
+				
+				<label for="group_description">Group Description: </label> 
+				<input type ="text" name="group_description" th:field="*{description}"><br>
+				<p th:each="err : ${#fields.errors('description')}" th:text="${err}" class="error"></p><br>
+				
+				<select name = "group_lang" th:field="*{groupLanguage}">
+					<option th:each="language: ${languages}"
+						th:value=${language}
+						th:text = ${language}>
+					</option>
+				</select>
+				
+				<input type="submit" value="create group">
+			</form>
+		</div>
+		<div class="logout_button" th:onclick="fetch('/logout',{method:'POST', redirect: 'follow',
+		headers: {'X-CSRF-TOKEN': $('meta[name=\'_csrf\']').attr('content')}})">
+		logout
+		</div>
+		
+	</div>
+	<div class="info_container">
+		<div class="user_groups">
+			<div  th:each = "user_group: ${user_groups}" class="user_group" 
+			th:onclick="|location.href='@{/group/{groupSerial}/main(groupSerial=${user_group.groupSerial})}'|">
+				<a th:text="${user_group.name}"></a>
+			</div>
+		</div>
+		
+		<div class="user_container">
+			<div  th:each = "user: ${users}" class="user">
+				<span th:text="${user.name}"></span><br>
+				<span th:text="${user.email}"></span><br>
+				<span th:text="${user.bio}"></span><br><br>
+			</div>
+		</div>
+		
+		<div class="other_groups" th:data-login="${session.email}">
+			<div th:each = "other_group: ${other_groups}" class="other_group">
+				<span th:text="${other_group.name}"></span><br>
+				<span th:text="${other_group.description}"></span>
+				<input type="hidden" id="message_data" value=""><br>
+				<button th:data-serial="${other_group.groupSerial}" 
+				th:onclick="executeAll([[${other_group.groupSerial}+'/requests']],[[${session.email}]]);">send join request</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

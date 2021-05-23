@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+<link rel="stylesheet" th:href="@{/css/register.css}">
+<link rel="stylesheet" th:href="@{/css/inputs.css}">
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/js/password-visibility.js}"></script>
+</head>
+<body>
+	<h1 class="title">Register</h1>
+	<div class="elements">
+		<form th:action="@{/user/register}" method="post" th:object="${userModel}" class="inputs">
+			<div class="name_input">
+				<label for="username">Username: </label> 
+				<input type ="text" name="username" th:field="*{name}" >
+				<p th:each="err : ${#fields.errors('name')}" th:text="${err}" class="error"></p><br>
+			</div>
+			
+			<div class="password_input">
+				<label for="pass">Password: </label>
+				<input type ="password" name="pass" th:field="*{pass}" id="password_field">
+				<div class="show_pass" onclick="changeVisibility()">☻</div><br>
+				<p th:each="err : ${#fields.errors('pass')}" th:text="${err}" class="error"></p><br>
+			</div>
+			
+			<div class="email_input">
+				<label for="email">e-Mail: </label>
+				<input type = "email" name="email" th:field="*{email}">
+				<p th:each="err : ${#fields.errors('email')}" th:text="${err}" class="error"></p><br>
+			</div>
+			
+			<div class="bio_input">
+				<label for="bio">Bio: </label>
+				<textarea  class="bio_edit"name="bio" th:field="*{bio}"></textarea>
+				<p th:each="err : ${#fields.errors('bio')}" th:text="${err}" class="error"></p><br>
+			</div>
+			
+			<div class="language_input">
+				<label for="languages">Languages: </label>
+				<select name = "languages" multiple="true" th:field="*{languages}">
+					<option th:each="language: ${T(com.diploma.model.LanguageEnum).values()}"
+						th:value=${language}
+						th:text = ${language}>
+					</option>
+				</select>
+				<p th:each="err : ${#fields.errors('languages')}" th:text="${err}" class="error"></p><br>
+			</div>
+			<div class="submit_button"onclick="javascript:this.parentNode.submit();">Register</div>
+		</form>
+	</div>
+</body>
+</html>

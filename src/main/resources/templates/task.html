@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/task.css}">
+<link rel="stylesheet" th:href="@{/css/inputs.css}">
+</head>
+<body>
+	<div class="task_creation_form">
+		<form th:if="${taskRights}" th:action="@{add-task}" method="post" class="task_creation">
+			task name: <input type ="text" name="task-name" ><br>
+			description: <input type ="text" name="task-description" ><br>
+			executor:
+			<select name = "executor-email">
+				<option th:each="executor: ${users}"
+					th:value=${executor.getUser().getEmail()}
+					th:text = ${executor.getUser().getEmail()}>
+				</option>
+			</select>
+			<input type="date" name = "deadline_date"><input type="time" name = "deadline_time"><br>
+			<input type="submit" value="register">
+		</form>
+	</div>
+
+	<div class="task_container">
+		<div class="pending_task_container">
+			<div  th:each = "pending_task: ${pending_tasks}" class="pending_task">
+				<span th:text="${pending_task.name}"></span><br>
+				<span th:text="${pending_task.description}"></span><br>
+				<span th:text="${pending_task.state}"></span><br>
+				<span th:text="${pending_task.executor.email}"></span><br>
+				<span th:text="${pending_task.deadline}"></span><br><br>
+				<form th:action="@{complete-task}" method="post">
+					<input type="hidden" name="taskID" th:value="${pending_task.taskId}">
+					<input type="hidden" name="executorEmail" th:value="${pending_task.executor.email}">
+					<input type="text" name="resultURL">
+					<input type="submit" value = "Complete task">
+				</form>
+			</div>
+		</div>
+		
+		<div class="done_task_container">
+			<div  th:each = "done_task: ${done_tasks}" class="done_task">
+				<span th:text="${done_task.name}"></span><br>
+				<span th:text="${done_task.description}"></span><br>
+				<a th:href="|//@{${done_task.resultURL}}|" th:text="${done_task.resultURL}"></a><br>
+				<span th:text="${done_task.state}"></span><br>
+				<span th:text="${done_task.executor.email}"></span><br>
+				<span th:text="${done_task.deadline}"></span><br><br>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

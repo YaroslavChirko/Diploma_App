@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta th:if="${_csrf}"name="_csrf" th:content="${_csrf.token}"/>
+<meta th:if="${_csrf}" name="_csrf_header" th:content="${_csrf.headerName}"/>
+<title th:text="${serial}">Group</title>
+<link rel="stylesheet" th:href="@{/css/group.css}">
+<link rel="stylesheet" th:href="@{/css/inputs.css}">
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+
+<script th:src="@{/js/chat_func.js}"></script>
+<script th:src="@{/js/change_user_rights.js}"></script>
+</head>
+<body onunload="disconnect()" th:data-serial="${serial}" th:onload="connect([[${serial}]]);">
+	<div class="group_name"><h1 th:text="${serial}"></h1></div>
+	<div class="group_content">
+		<div class="group_functions">
+			<div class="buttons_container">
+				<div th:if="${groupRights}" th:onclick="|location.href='@{details}'|" class="redirect_button">to group details</div>
+				<div th:if="${taskRights}" th:onclick="|location.href='@{tasks/all-tasks}'|" class="redirect_button">to all tasks</div>
+				<div  th:onclick="|location.href='@{tasks/{email}(email = ${session.email})}'|" class="redirect_button">to my tasks</div>
+				<div th:if="${requestRigths}" th:onclick="|location.href='@{/group/{groupSerial}/add-user-form(groupSerial=${serial})}'|" class="redirect_button">add user</div>
+				<div th:if="${requestRigths}" th:onclick="|location.href='@{/group/{groupSerial}/requests(groupSerial=${serial})}'|" class="redirect_button">to requests</div>
+			</div>
+			
+			<div class="users_container">
+				<div  th:each = "user: ${users}" th:class="|user_info_${user.user.id}|" id="user_container">
+					<span th:text="${user.user.name}"></span><br>
+					<div th:class="|user_rights_${user.user.id}|">
+						<span th:if="${user.hasAcceptRequestRights}">Can accept requests<br></span>
+						<span th:if="${user.hasGroupModifyRights}">Can change group info<br></span>
+						<span th:if="${user.hasTaskModifyRights}">Can add/modify tasks<br></span>
+					</div>
+					<button th:if="${requestRigths}" th:data-id="${user.user.id}" th:class="|manage_${user.user.id}|" th:onclick="showChangeForm([[${user.user.id}]])">manage rights</button>
+				</div>
+			</div>
+		</div>
+		<div class="message_content">
+			<div class="message_container" id="message_container" >
+				<div  th:each = "message: ${messages}" class="message">
+					<span th:text="${message.fromLogin}"></span><br>
+					<span th:utext="${#strings.replace(#strings.escapeXml(message.message),'&#10;','&lt;br&gt;')}"></span><br>
+					<span th:text="${message.sentAt}"></span><br><br>
+					
+				</div>
+			</div>
+			
+			<div class="message_input">
+				<textarea id="message_data" class="message_data" maxlength="1000" placeholder="type message here..."></textarea>
+				<div class="send_button"  th:data-login="${session.email}" th:onclick="sendMessage([[${serial}]],[[${session.email}]]);">send message</div>
+			</div>
+		</div>
+	</div>
+</body >
+</html>

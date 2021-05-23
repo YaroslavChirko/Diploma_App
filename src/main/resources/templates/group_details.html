@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${group.name}"></title>
+
+<link rel="stylesheet" th:href="@{/css/details.css}">
+<link rel="stylesheet" th:href="@{/css/inputs.css}">
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/js/description_edit.js}"></script>
+
+</head>
+<body>
+	<div class="elements">
+		<form class="edit_form" th:action="@{details/edit}" method="post">
+			<div class="entity_name">
+				<p class="name"  th:text="${group.name}"></p>
+			</div>
+		
+			<p class="entity_identifier" th:text = "${group.groupSerial}"></p>
+			
+			<div class="entity_information">
+				<p class="description"  th:text="${group.description}"></p>
+			</div>
+			
+			<p class="group_language" th:text="${group.groupLanguage}"></p>
+			<div class="group_users">
+				<div class="group_user" th:each="user: ${group.users}">
+					<p th:text = "${user.user.name}"></p>
+					<p th:text = "${user.user.email}"></p>
+				</div>
+			</div>
+		</form>
+		
+		<button class="edit"
+			th:data-name = "${group.name}"
+			th:data-bio = "${group.description}"
+		 	th:onclick="showEditForm([[${group.name}]],[[${group.description}]]);">edit</button>
+	 </div>
+</body>
+</html>

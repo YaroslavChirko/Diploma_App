@@ -1,0 +1,93 @@
+html{
+	background-color:#71b5cc;
+	width:100%;
+	height:100%;
+}
+body{
+	text-align:center;
+	width:100%;
+	height:100%;
+}
+
+.title{
+	width:15%;
+	margin-left:auto;
+	margin-right: auto;
+}
+
+.error{
+	color: red;
+	flex:0.5;
+}
+
+.show_pass{
+	cursor:pointer;
+	width:20px;
+	height:20px;
+	background-color:springgreen;
+}
+
+.elements{
+	background-color:lightskyblue;
+	width:60%;
+	height:40%;
+	
+	
+  	position: absolute;
+  	top: 0; left: 0; bottom: 0; right: 0;
+	
+	min-height:max-content;
+	min-width:max-content;
+	margin:auto;
+}
+
+.inputs{
+	min-height:max-content;
+	min-width:max-content;
+	width:20%;
+	height:100%;
+	margin-left:auto;
+	margin-right: auto;
+	display:flex;
+	flex-direction: column;
+}
+
+.email_input,.password_input,.bio_input,.name_input,.language_input{
+	color:val(--button-color);
+	text-align:center;
+	min-height:max-content;
+	min-width:max-content;
+	background-color: darkseagreen;
+	border-style: solid;
+	border-width:2px;
+	border-color: olive;
+	border-radius:10px;
+	flex: 2;
+}
+
+.bio_edit{
+	height:95%;
+	resize: none;
+}
+
+.submit_button{
+	cursor:pointer;
+	text-align:center;
+	min-height:max-content;
+	min-width:max-content;
+	background-color: lightgray;
+	border-style: solid;
+	border-width:2px;
+	border-radius:7px;
+	border-color: gray;
+	flex: 1;
+}
+
+.submit_button:active{
+	cursor:pointer;
+	text-align:center;
+	min-height:max-content;
+	min-width:max-content;
+	background-color: gray;
+	flex: 1;
+}
