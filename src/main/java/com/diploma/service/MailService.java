@@ -16,8 +16,8 @@ public class MailService {
 		 sender.setHost("smtp.gmail.com");
 		 sender.setPort(587);
 		
-		sender.setUsername("group.creation.app@gmail.com");
-		sender.setPassword("Sy5BN3u2aYdQaiN");
+		sender.setUsername("");
+		sender.setPassword("");
 		
 		Properties props = sender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
@@ -33,7 +33,7 @@ public class MailService {
 		String passwordResetUrl = baseUrl+"/user/"+resetCode+"/"+userEmail;
 		message.setTo(userEmail);
 		message.setSubject("Password Reset");
-		message.setFrom("group.creation.app@gmail.com");
+		message.setFrom("");
 		message.setText("Password change was requested for \n User: "
 				+userEmail+"\n on group creation app.\n"
 				+ "if it was you follow: "+passwordResetUrl+" to change password,\n"		
